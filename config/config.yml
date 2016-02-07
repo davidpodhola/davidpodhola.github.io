@@ -1,12 +1,12 @@
 # ----------------------- #
 #      Main Configs       #
 # ----------------------- #
-#http://david.podhola.net
+#http://localhost:8080 
 
-url: http://localhost:8080 
+url: http://david.podhola.net
 gitlocation: https://github.com/davidpodhola/davidpodhola.github.io.git
 gitbranch: master
-title: David Podhola - F# developer with sales and marketing
+title: David Podhola - F# developer with sales and marketing skills
 description: >
     I love to code and develop application. Have been doing it in BASIC and Pascal since 1986 for fun, professionally since 1994.
 
