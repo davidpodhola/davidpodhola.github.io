@@ -1,19 +1,23 @@
+@using System.Linq
+@helper PostDate(DateTime rawDate) {
+    <time datetime="@rawDate.ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss")" pubdate data-updated="true">@rawDate.ToString("MMM d, yyyy")</time>
+}
 
 <html>
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
     <title>David Podhola - F# developer with sales and marketing skills</title>
-    <link rel="stylesheet" href="http://david.podhola.net//stylesheets/styles.css">
-    <link rel="stylesheet" href="http://david.podhola.net//stylesheets/pygment_trac.css">
-    <link rel="shortcut icon" href="http://david.podhola.net//favicon.png">
+    <link rel="stylesheet" href="@Model.Root/stylesheets/styles.css">
+    <link rel="stylesheet" href="@Model.Root/stylesheets/pygment_trac.css">
+    <link rel="shortcut icon" href="@Model.Root/favicon.png">
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
     <!--[if lt IE 9]>
     <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
     <!-- FSharp.Formatting Styles -->
-  	<link rel="stylesheet" type="text/css" media="screen" href="http://david.podhola.net//fsharp.formatting/tooltips.css" />
-  	<script type="text/javascript" src="http://david.podhola.net//fsharp.formatting/tooltips.js"></script>
+  	<link rel="stylesheet" type="text/css" media="screen" href="@Model.Root/fsharp.formatting/tooltips.css" />
+  	<script type="text/javascript" src="@Model.Root/fsharp.formatting/tooltips.js"></script>
     <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <script language="javascript" type="text/javascript">
         function init()
@@ -27,7 +31,7 @@
   <body>
   	<div class="wrapper">
 	  <header>
-	  	  <a href="http://david.podhola.net//index.html" class="falseheader">David Podhola</a>
+	  	  <a href="@Model.Root/index.html" class="falseheader">David Podhola</a>
         <p>F# developer with sales and marketing skills</p>
 
         <p class="view">
@@ -41,36 +45,20 @@
           <li><a target="_blank" href="https://twitter.com/FakeCRM"><strong>Twitter</strong> feed</a></li>
         </ul>
         <h2>Recent posts</h2>
+        @foreach (var post in Enumerable.Take(Model.Posts, 5))
+    		{
+    		    <h3 class="h2link"><a href="@Model.Root/blog/@post.Url/index.html">@post.Title</a></h3>
+    		    <p class="view"><small>@PostDate(post.Date)</small><br />@post.Abstract</p>
+    		}
       </header>
       <section>
-		    
-
-<h1>David Podhola</h1>
-
-<p>I love to code and develop application. Have been doing it in BASIC and Pascal since 1986 for fun, professionally since 1994.</p>
-
-<p>
-I strongly believe in:
-<ul>
-    <li>using the latest technologies</li>
-    <li>testing</li>
-    <li>keeping the users and their business needs first</li>
-    <li>understanding the full technology stack I am working with</li>
-    <li>Microsoft changed and is doing great OSS work</li>
-    <li>open-source</li>
-    <li>functional programming</li>
-    <li>usability</li>
-    <li>using native application (e.g. on mobile phones) and synchronizing them if needed</li>
-</ul>	
-</p>
-<p>The best applications are those that are silently helping the users to do their work unnoticed.</p>
-
+		    @RenderBody()
       </section>
       <footer>
         <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
       </footer>
   	</div>
-    <script src="http://david.podhola.net//javascripts/scale.fix.js"></script>
+    <script src="@Model.Root/javascripts/scale.fix.js"></script>
 	
 	<script>
 	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
